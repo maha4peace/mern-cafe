@@ -17,6 +17,17 @@ export default class SignUpForm extends Component {
         }) 
     }
 
+    handleSubmit = (evt) => {
+        evt.preventDefault() 
+        try {
+            const formData = {...this.state}
+            this.props.setUser(formData)
+        } catch {
+            this.setState({error: "Sign up failed!"})
+            alert(JSON.stringify(this.state))
+        }
+    }
+
     render() {
         const disable = this.state.password !== this.state.confirm;
         return  (
