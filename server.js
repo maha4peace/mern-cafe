@@ -19,10 +19,10 @@ app.use(express.json()) ;
 app.use(express.static(path.join(__dirname, 'build'))) ; 
 
 // Put API routes here, before the "catch all" route
+app.use('/api/users', require('./routes/api/users'))
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
-
 app.get('/*', function(req,rest) {
     rest.sendFile(path.join(__dirname, 'build', 'index.html'))
 }) ; 
