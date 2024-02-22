@@ -1,6 +1,26 @@
-import { Component } from "react";
 
-export default class SignUpForm extends Component {
+/*import 
+
+class SignUpForm  {
+    constructor() {
+        this.state = {
+            state = {
+                name: '',
+                email: '',
+                password: '',
+                confirm: '',
+                error: ''
+            }
+        }
+
+    }
+} */
+
+import { Component } from "react";
+import {signUp} from '../../utilities/users-service'
+
+
+ export default class SignUpForm extends Component {
     state = {
         name: '',
         email: '',
@@ -10,21 +30,25 @@ export default class SignUpForm extends Component {
     }
 
     handleChange = (evt) => {
+        console.log(evt.target)
         this.setState({
-            [evt.target.name] : evt.target.value,
+            [evt.target.name] : evt.target.value, 
             error: ''
-
         }) 
     }
 
-    handleSubmit = (evt) => {
+    handleSubmit = async (evt) => {
         evt.preventDefault() 
+        // Prevent form from being submitted to the server
         try {
             const formData = {...this.state}
-            this.props.setUser(formData)
+            delete formData.error
+            delete formData.confirm
+            console.log(this.state)
+            this.props.setUser(formData) 
         } catch {
             this.setState({error: "Sign up failed!"})
-            alert(JSON.stringify(this.state))
+            //alert(JSON.stringify(this.state))
         }
     }
 
@@ -65,4 +89,4 @@ export default class SignUpForm extends Component {
             </div>
         )
     }
-}
+} 
