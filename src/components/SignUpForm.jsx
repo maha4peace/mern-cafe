@@ -1,10 +1,9 @@
 
-/*import 
+import 
 
-class SignUpForm  {
-    constructor() {
+function SignUpForm() {
+       const [user, setUser] = useState(null) {
         this.state = {
-            state = {
                 name: '',
                 email: '',
                 password: '',
@@ -13,8 +12,11 @@ class SignUpForm  {
             }
         }
 
+
+
+
     }
-} */
+ 
 
 import { Component } from "react";
 //import {signUp} from "./utilities/users-service"
