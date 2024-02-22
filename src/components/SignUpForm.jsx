@@ -1,27 +1,40 @@
 
-import { useState } from "react";}
+import { useState } from "react";
+import { signUp } from "../utilities/users-api";}
 
-function SignUpForm() {
+function SignUpForm({setUser}) {
        const [formData, setFormData] = useState({
                 name: '',
                 email: '',
                 password: '',
                 confirm: '',
-        }) 
-    }
- 
+        }) ;
+    
+
+const [error, setError] = useState('')  
+
+
 function handleFormChange(event) {
-    setFormData({...formData, [event.target.name] : event.target.value})
+   const {name, value} = event.target
+   setFormData({...formData, [name]: value })
 }
 
 function handleFormSubmit(event) {
     event.preventDefault();
-    console.log("form submitted:", formData)
+    try {
+        const userData = {...formData} ;
+        delete userData.confirm ; 
+        const user = await signUp(userData)
+        setUser(user)
+    } catch(error) {
+        setError("Sign Up Failed - Try Again")
+    }
 }
 
-const disable = this.state.password !== this.state.confirm;
+const disable = formData.password !== formData.confirm;
 
-return  (
+ return  (
+    
     <div>
         <div className="form-container">
             <form autoComplete="off" onSubmit={handleFormSubmit}>
@@ -52,9 +65,12 @@ return  (
                 <button type="submit" disabled={disable}>SIGN UP</button>
             </form>
         </div>
-        <p className="error-message">&nbsp;{this.state.error}</p>
+        <p className="error-message">&nbsp;{error}</p>
     </div>
-)
+    )
+}
+
+export default SignUpForm ; 
 
 
 /* import { Component } from "react";
