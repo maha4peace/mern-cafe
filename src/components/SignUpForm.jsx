@@ -1,24 +1,63 @@
 
-import 
+import { useState } from "react";}
 
 function SignUpForm() {
-       const [user, setUser] = useState(null) {
-        this.state = {
+       const [formData, setFormData] = useState({
                 name: '',
                 email: '',
                 password: '',
                 confirm: '',
-                error: ''
-            }
-        }
-
-
-
-
+        }) 
     }
  
+function handleFormChange(event) {
+    setFormData({...formData, [event.target.name] : event.target.value})
+}
 
-import { Component } from "react";
+function handleFormSubmit(event) {
+    event.preventDefault();
+    console.log("form submitted:", formData)
+}
+
+const disable = this.state.password !== this.state.confirm;
+
+return  (
+    <div>
+        <div className="form-container">
+            <form autoComplete="off" onSubmit={handleFormSubmit}>
+                <label>Name</label>
+                <input 
+                    type="text" 
+                    name="name" 
+                    value={formData.name} 
+                    onChange={handleFormChange} required />
+                <label>Email</label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleFormChange} required />
+                <label>Password</label>
+                <input 
+                    type="password" 
+                    name="password" 
+                    value={formData.password} 
+                    onChange={handleFormChange} required />
+                <label>Confirm</label>
+                <input 
+                    type="password" 
+                    name="confirm" 
+                    value={formData.confirm} 
+                    onChange={handleFormChange} required />
+                <button type="submit" disabled={disable}>SIGN UP</button>
+            </form>
+        </div>
+        <p className="error-message">&nbsp;{this.state.error}</p>
+    </div>
+)
+
+
+/* import { Component } from "react";
 //import {signUp} from "./utilities/users-service"
 
 
@@ -91,4 +130,4 @@ import { Component } from "react";
             </div>
         )
     }
-} 
+} */
